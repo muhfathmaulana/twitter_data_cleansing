@@ -60,7 +60,7 @@ def update_item(text: str):
     # Gunakan regex untuk mengganti kata tidak baku
     cleaned_text = pattern.sub(ganti_kata, text)
     cleaned_text2 = re.sub(r"\\dan", " ", cleaned_text)
-    cleaned_text3 = re.sub(r"\\\w\d\d|\\\w\w\d|\\\w\d\w|\\\w\w\w", "", cleaned_text2)
+    cleaned_text3 = re.sub(r"\\\w\d\d|\\\w\w\d|\\\w\d\w|\\\w\w\w|USER|RT", "", cleaned_text2)
     cleaned_text4 = re.sub(r"[^a-zA-Z0-9\s$#,.]", "", cleaned_text3)
     
     return {"cleaned_text": cleaned_text4}
@@ -86,7 +86,7 @@ async def clean_csv(file: UploadFile = File(...)):
         cleaned_text2 = re.sub(r"\\dan", " ", cleaned_text0)
         cleaned_text3 = re.sub(r"\\\w\d\d|\\\w\w\d|\\\w\d\w|\\\w\w\w", "", cleaned_text2)
         cleaned_text4 = re.sub(r"[^a-zA-Z0-9\s$#,.]", "", cleaned_text3)
-        cleaned_text5 = re.sub(r"\t|,00", " ", cleaned_text4)
+        cleaned_text5 = re.sub(r"\t|,00|USER|RT", " ", cleaned_text4)
         cleaned_text6 = re.sub(r",(?=\d)", "\t", cleaned_text5)
         
         # Tulis data yang telah dibersihkan ke file CSV baru
